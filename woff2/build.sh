@@ -19,4 +19,4 @@ done
 wait
 
 $CXX $CXXFLAGS *.o $FUZZER_LIB ../target_woff2.cc -I src \
-    -o ../woff2.symsan
+    -o ../woff2.$EXT

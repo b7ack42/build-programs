@@ -14,4 +14,4 @@ make all -j $(nproc)
 
 $CXX $CXXFLAGS -std=c++11 -I include -I . -I ../libarchive-3.4.3/libarchive src/tools/ftfuzzer/ftfuzzer.cc \
     objs/.libs/libfreetype.a $FUZZER_LIB ../libarchive-3.4.3/.libs/libarchive.a \
-    -o ../freetype.symsan
+    -o ../freetype.$EXT

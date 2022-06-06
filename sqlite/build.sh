@@ -21,5 +21,5 @@ $CC $CFLAGS -I. -c \
     ../test/ossfuzz.c -o ../test/ossfuzz.o
 
 $CXX $CXXFLAGS \
-    ../test/ossfuzz.o -pthread -ldl -o ../sqlite.symsan \
+    ../test/ossfuzz.o -pthread -ldl -o ../sqlite.$EXT \
     $LIB_FUZZING_ENGINE ./sqlite3.o

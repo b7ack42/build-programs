@@ -8,4 +8,4 @@ make -j $(nproc) -C src fuzzing
 
 
 $CXX $CXXFLAGS -std=c++11 -I src/ test/fuzzing/hb-fuzzer.cc \
-    src/.libs/libharfbuzz-fuzzing.a $FUZZER_LIB -o ../harfbuzz.symsan
+    src/.libs/libharfbuzz-fuzzing.a $FUZZER_LIB -o ../harfbuzz.$EXT

@@ -5,4 +5,4 @@ autoreconf -fiv
 make -j $(nproc)
 
 $CXX $CXXFLAGS -std=c++11 ../libjpeg_turbo_fuzzer.cc -I . \
-    .libs/libturbojpeg.a $FUZZER_LIB -o ../libjpeg.symsan
+    .libs/libturbojpeg.a $FUZZER_LIB -o ../libjpeg.$EXT

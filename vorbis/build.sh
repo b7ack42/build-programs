@@ -24,5 +24,5 @@ make install
 cd ..
 
 $CXX $CXXFLAGS -std=c++11 ./decode_fuzzer.cc \
-    -o vorbis.symsan -L"$INSTALL_DIR/lib" -I"$INSTALL_DIR/include" \
+    -o vorbis.$EXT -L"$INSTALL_DIR/lib" -I"$INSTALL_DIR/include" \
     $FUZZER_LIB -lvorbisfile -lvorbis -logg

@@ -9,5 +9,5 @@ make
 
 # Compile fuzzer.
 $CXX $CXXFLAGS -I../include $FUZZER_LIB \
-    ../src/test_lib_json/fuzz.cpp -o ../jsoncpp.symsan \
+    ../src/test_lib_json/fuzz.cpp -o ../jsoncpp.$EXT \
     ./lib/libjsoncpp.a

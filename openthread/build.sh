@@ -31,4 +31,4 @@ sed -i 's/ -Werror//g' config*  # Disable compiler warnings.
     --enable-ncp --disable-docs
 make V=1 -j $(nproc)
 
-cp tests/fuzz/ip6-send-fuzzer ../openthread.symsan
+cp tests/fuzz/ip6-send-fuzzer ../openthread.$EXT
