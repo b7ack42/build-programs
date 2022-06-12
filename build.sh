@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export CC=/home/jinghan/vivifuzz/fastgen/bin/ko-clang
-export CXX=/home/jinghan/vivifuzz/fastgen/bin/ko-clang++
+export CC=/Kirenenko/bin/ko-clang
+export CXX=/Kirenenko/bin/ko-clang++
 export KO_CC=clang-6.0
 export KO_CXX=clang++-6.0
 

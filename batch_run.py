@@ -29,7 +29,6 @@ targets.append('libjpeg')
 
 
 
-# progs_dir = '/home/jinghan/build-programs/programs'
 root_dir = '/out'
 
 ce_fp = os.path.join(root_dir, 'fastgen')
@@ -37,6 +36,7 @@ ce_fp = os.path.join(root_dir, 'fastgen')
 inputs_dir = os.path.join(root_dir, 'inputs')
 outputs_dir = os.path.join(root_dir, 'outputs')
 logs_dir = os.path.join(root_dir, 'logs')
+progs_dir = os.path.join(root_dir, 'programs')
 
 
 
@@ -52,13 +52,13 @@ def safe_make(dir_path):
 
 
 def run(prog):
-    env = {'RUST_LOG', 'info'}
+    env = {'RUST_LOG': 'info'}
     args = [ce_fp]
     args += ['-i', os.path.join(inputs_dir, 'input_{}'.format(prog))]
     args += ['-o', os.path.join(outputs_dir, 'corpus_{}'.format(prog))]
-    args += ['-t', os.path.join(progs_dir, '{}.track'.format(pro))]
+    args += ['-t', os.path.join(progs_dir, '{}.track'.format(prog))]
     args += ['--']
-    args += [os.path.join(progs_dir, '{}.fast'.format(pro))]
+    args += [os.path.join(progs_dir, '{}.fast'.format(prog))]
     if prog == 'objdump':
         args += ['-D']
     elif prog == 'nm':
@@ -66,10 +66,14 @@ def run(prog):
     elif prog == 'readelf':
         args += ['-a']
     
-    log_fp = os.path.join(logs_dir, 'log_{}'.format(prog)
+    args += ['@@']
+
+    print ' '.join(args)
+    
+    log_fp = os.path.join(logs_dir, 'log_{}'.format(prog))
 
     with open(log_fp, 'w') as f:
-        p = Popen(args, shell=True, stdout=f, stderr=f, env=env)
+        p = subprocess.Popen(args, shell=True, stdout=f, stderr=f, env=env)
         p.wait()
     
     return prog
@@ -78,8 +82,9 @@ def run(prog):
 
 def batch(progs):
     for prog in progs:
-        corpus_dir = os.path.join(ouputs_dir, 'corpus_{}'.format(prog))
-        if not safe_make(corpus_dir):
+        corpus_dir = os.path.join(outputs_dir, 'corpus_{}'.format(prog))
+        if os.path.exists(dir_path):
+            print "Clean {} first!".format(dir_path)
             return
     
     pool = ThreadPool(20)
