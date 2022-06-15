@@ -7,7 +7,7 @@ from multiprocessing.pool import ThreadPool
 
 
 targets = []
-# targets.append('harfbuzz')
+# # targets.append('harfbuzz')
 targets.append('libjpeg')
 # targets.append('freetype')
 # # targets.append('json')
@@ -52,13 +52,19 @@ def safe_make(dir_path):
 
 
 def run(prog):
+    fast_fp = os.path.join(progs_dir, '{}.fast'.format(prog))
+    track_fp = os.path.join(progs_dir, '{}.track'.format(prog))
+    if (not os.path.isfile(track_fp)) or (not os.path.isfile(fast_fp)):
+        print '{} or {} not exists!'.format(track_fp, fast_fp)
+        return
+
     env = {'RUST_LOG': 'info'}
     args = [ce_fp]
     args += ['-i', os.path.join(inputs_dir, 'input_{}'.format(prog))]
     args += ['-o', os.path.join(outputs_dir, 'corpus_{}'.format(prog))]
-    args += ['-t', os.path.join(progs_dir, '{}.track'.format(prog))]
+    args += ['-t', track_fp]
     args += ['--']
-    args += [os.path.join(progs_dir, '{}.fast'.format(prog))]
+    args += [fast_fp]
     if prog == 'objdump':
         args += ['-D']
     elif prog == 'nm':
